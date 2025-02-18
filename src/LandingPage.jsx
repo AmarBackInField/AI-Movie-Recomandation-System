@@ -12,7 +12,7 @@ const MovieLanding = () => {
     
     try {
       setIsLoading(true);
-      const response = await fetch('https://flask-hello-world-production-cf12.up.railway.app/', {
+      const response = await fetch('https://flask-hello-world-production-cf12.up.railway.app', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
