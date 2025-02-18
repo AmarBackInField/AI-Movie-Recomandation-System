@@ -12,7 +12,7 @@ const MovieLanding = () => {
     
     try {
       setIsLoading(true);
-      const response = await fetch('http://127.0.0.1:8000/recommend', {
+      const response = await fetch('https://flask-hello-world-is23.onrender.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
