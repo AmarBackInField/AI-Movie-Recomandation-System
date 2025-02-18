@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Film, Heart, Star, TrendingUp } from 'lucide-react';
-
 const MovieLanding = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState([]);
@@ -56,9 +55,9 @@ const MovieLanding = () => {
       <div 
         className="background"
         style={{
-          background: `radial-gradient(circle at ${50 + mousePosition.x * 20}% ${50 + mousePosition.y * 20}%, #ffffff 0%, transparent 50%),
-                      radial-gradient(circle at ${70 - mousePosition.x * 25}% ${30 - mousePosition.y * 20}%, #4444ff22 0%, transparent 50%),
-                      radial-gradient(circle at ${30 + mousePosition.x * 20}% ${70 + mousePosition.y * 20}%, #44ff4422 0%, transparent 50%)`
+          // background: `radial-gradient(circle at ${50 + mousePosition.x * 20}% ${50 + mousePosition.y * 20}%, #FFE4B5 0%, transparent 10%),
+                      // radial-gradient(circle at ${70 - mousePosition.x * 25}% ${30 - mousePosition.y * 20}%, #4444ff22 0%, transparent 50%),
+                      // radial-gradient(circle at ${30 + mousePosition.x * 20}% ${70 + mousePosition.y * 20}%, #44ff4422 0%, transparent 50%)`
         }}
       />
 
@@ -85,13 +84,13 @@ const MovieLanding = () => {
           </h1>
           <p className="hero-subtitle">
             Our AI-powered recommendation system learns your taste and suggests movies you'll love. 
-            Stop scrolling, start watching.
           </p>
+          <p className="theeme">Stop Scrolling, Start Watching </p>
         </section>
 
         {/* Search Section */}
         <section className="search-section">
-          <h2>Find Your Next Movie Now</h2>
+          <h3>Let AI Pick Your Next Movie</h3>
           <div className="search-container">
             <input
               type="text"
@@ -189,7 +188,7 @@ const MovieLanding = () => {
         <footer className="footer">
           <div className="footer-content">
             <Film className="spin-animation" />
-            <span>© made with Lovjeet and Amar.</span>
+            <span>© Made By Amar Choudhary</span>
           </div>
         </footer>
       </div>
@@ -229,6 +228,25 @@ const MovieLanding = () => {
             z-index: 2;
           }
           
+          @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+          }
+          
+          @keyframes blink {
+            50% { border-color: transparent; }
+          }
+          
+          .theeme {
+            font-size: 1.5rem;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid black; /* Simulating cursor */
+            width: 0;
+            display: inline-block;
+            animation: typing 2s steps(30, end) forwards, blink 0.5s step-end infinite alternate;
+          }
           /* Navbar Styles */
 .navbar {
   padding: 0.8rem 2rem;
