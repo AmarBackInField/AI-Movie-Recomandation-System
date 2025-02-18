@@ -7,99 +7,34 @@ const MovieLanding = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
-  // const handleSearch = async () => {
-  //   if (!searchQuery.trim()) return;
-    
-  //   try {
-  //     setIsLoading(true);
-  //     const response = await fetch('https://flask-hello-world-production-cf12.up.railway.app/recommend/', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ query: searchQuery }),
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //     const data = await response.json();
-  //     console.log(data)
-
-  //     setMovies(data.movies || []);
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //     setMovies([]);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-// const handleSearch = async () => {
-//   if (!searchQuery.trim()) return;
-  
-//   try {
-//     setIsLoading(true);
-//     const response = await fetch('https://flask-hello-world-production-cf12.up.railway.app/recommend', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Accept': 'application/json',
-//       },
-//       // FastAPI expects the data in the format matching your Pydantic model (QueryInput)
-//       body: JSON.stringify({ query: searchQuery }),
-//     });
-
-//     if (!response.status === 422) {
-//       throw new Error('Invalid input data');
-//     }
-    
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! status: ${response.status}`);
-//     }
-
-//     const data = await response.json();
-//     console.log('Response data:', data);
-//     setMovies(data.movies || []);
-//   } catch (error) {
-//     console.error('Error details:', error);
-//     setMovies([]);
-//   } finally {
-//     setIsLoading(false);
-//   }
-// };
   const handleSearch = async () => {
-  if (!searchQuery.trim()) return;
-  
-  try {
-    setIsLoading(true);
-    console.log('Sending request to recommend endpoint...'); // Debug log
+    if (!searchQuery.trim()) return;
     
-    const response = await fetch('https://flask-hello-world-production-cf12.up.railway.app/recommend', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      credentials: 'omit', // Add this line
-      body: JSON.stringify({ query: searchQuery }),
-    });
+    try {
+      setIsLoading(true);
+      const response = await fetch('https://flask-hello-world-production-cf12.up.railway.app/recommend', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query: searchQuery }),
+      });
 
-    console.log('Response status:', response.status); // Debug log
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log(data)
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      setMovies(data.movies || []);
+    } catch (error) {
+      console.error('Error:', error);
+      setMovies([]);
+    } finally {
+      setIsLoading(false);
     }
-    
-    const data = await response.json();
-    console.log('Response data:', data); // Debug log
-    setMovies(data.movies || []);
-  } catch (error) {
-    console.error('Detailed error:', error);
-    setMovies([]);
-  } finally {
-    setIsLoading(false);
-  }
-};
+  };
+
   useEffect(() => {
     setIsVisible(true);
 
