@@ -34,34 +34,67 @@ const MovieLanding = () => {
   //     setIsLoading(false);
   //   }
   // };
-const handleSearch = async () => {
+// const handleSearch = async () => {
+//   if (!searchQuery.trim()) return;
+  
+//   try {
+//     setIsLoading(true);
+//     const response = await fetch('https://flask-hello-world-production-cf12.up.railway.app/recommend', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json',
+//       },
+//       // FastAPI expects the data in the format matching your Pydantic model (QueryInput)
+//       body: JSON.stringify({ query: searchQuery }),
+//     });
+
+//     if (!response.status === 422) {
+//       throw new Error('Invalid input data');
+//     }
+    
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+
+//     const data = await response.json();
+//     console.log('Response data:', data);
+//     setMovies(data.movies || []);
+//   } catch (error) {
+//     console.error('Error details:', error);
+//     setMovies([]);
+//   } finally {
+//     setIsLoading(false);
+//   }
+// };
+  const handleSearch = async () => {
   if (!searchQuery.trim()) return;
   
   try {
     setIsLoading(true);
+    console.log('Sending request to recommend endpoint...'); // Debug log
+    
     const response = await fetch('https://flask-hello-world-production-cf12.up.railway.app/recommend', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Accept': 'application/json'
       },
-      // FastAPI expects the data in the format matching your Pydantic model (QueryInput)
+      credentials: 'omit', // Add this line
       body: JSON.stringify({ query: searchQuery }),
     });
 
-    if (!response.status === 422) {
-      throw new Error('Invalid input data');
-    }
-    
+    console.log('Response status:', response.status); // Debug log
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
+    
     const data = await response.json();
-    console.log('Response data:', data);
+    console.log('Response data:', data); // Debug log
     setMovies(data.movies || []);
   } catch (error) {
-    console.error('Error details:', error);
+    console.error('Detailed error:', error);
     setMovies([]);
   } finally {
     setIsLoading(false);
